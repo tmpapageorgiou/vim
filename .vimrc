@@ -29,7 +29,7 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 " easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
+map <Leader>j <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 
 " map sort function to a key
@@ -166,6 +166,7 @@ set ai			" set autoident
 set viminfo='10,\"100,:20,%,n~/.viminfo " memoriza posicao do arquivo desde a ultima edicao
 set pastetoggle=<F2>
 
+nnoremap <leader>/ :let@/ = ""<CR>
 set ai			" set autoident
 "source ~/.vim/plugin/cscope_maps.vim
 
