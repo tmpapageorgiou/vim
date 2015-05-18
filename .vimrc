@@ -87,14 +87,16 @@ set nofoldenable
 autocmd BufWritePre *.py :%s/\s\+$//e
 
 " syntax checker
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+autocmd BufRead *.py set statusline+=%#warningmsg#
+autocmd BufRead *.py set statusline+=%{SyntasticStatuslineFlag()}
+autocmd BufRead *.py set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+autocmd BufRead *.py let g:syntastic_always_populate_loc_list = 1
+autocmd BufRead *.py let g:syntastic_auto_loc_list = 1
+autocmd BufRead *.py let g:syntastic_check_on_open = 1
+autocmd BufRead *.py let g:syntastic_check_on_wq = 0
+
+autocmd BufRead *.tex set spell spelllang=pt_br
 
 " ===============
 "  END LABORATORY
