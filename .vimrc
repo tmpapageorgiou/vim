@@ -84,7 +84,7 @@ let g:SuperTabDefaultCompletionType = "context"
 set nofoldenable
 
 " AUto remove trailing spaces before save
-autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufRead * :%s/\s\+$//e
 
 " syntax checker
 autocmd BufRead *.py set statusline+=%#warningmsg#
