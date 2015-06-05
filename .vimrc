@@ -96,6 +96,8 @@ autocmd BufRead *.py let g:syntastic_auto_loc_list = 1
 autocmd BufRead *.py let g:syntastic_check_on_open = 1
 autocmd BufRead *.py let g:syntastic_check_on_wq = 0
 
+" File extension modifiers
+set nospell
 autocmd BufRead *.tex set spell spelllang=pt_br
 
 " ===============
@@ -168,9 +170,12 @@ set ai			" set autoident
 set viminfo='10,\"100,:20,%,n~/.viminfo " memoriza posicao do arquivo desde a ultima edicao
 set pastetoggle=<F2>
 
+" File extension modifiers
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+
 nnoremap <leader>/ :let@/ = ""<CR>
 set ai			" set autoident
-"source ~/.vim/plugin/cscope_maps.vim
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
