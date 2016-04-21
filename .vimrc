@@ -50,7 +50,7 @@ set t_Co=256
 color wombat256mod
 
 highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace / \+$/ 
+match ExtraWhitespace / \+$/
 
 highlight SignColumn ctermbg=230
 set colorcolumn=80
@@ -98,33 +98,24 @@ autocmd BufRead *.py let g:syntastic_check_on_wq = 0
 
 " File extension modifiers
 set nospell
-autocmd BufRead *.tex set spell spelllang=pt_br
+"autocmd BufRead *.tex set spell spelllang=pt_br
+
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype python setlocal ts=4 sts=4 sw=4
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+autocmd Filetype json setlocal ts=2 sts=2 sw=2
 
 " ===============
 "  END LABORATORY
 " ===============
 
+set nocompatible
 
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
-
-" Vim5 and later versions support syntax highlighting. Uncommenting the
-" following enables syntax highlighting by default.
 if has("syntax")
   syntax on
 endif
 
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-"set background=dark
-
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-"if has("autocmd")
-"  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
+set background=dark
 
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
@@ -133,21 +124,17 @@ if has("autocmd")
 endif
 
 "autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guigb=red
-"au InsertLeave * match ExtraWhitespace /\s\+$/ 
-"highlight OverLength ctermbg=red ctermfg=white guibg=#592929 
+"au InsertLeave * match ExtraWhitespace /\s\+$/
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 "match OverLength /\%81v.*/
 
-"highlight ExtraWhitespace ctermbg=red ctermfg=white guibg=#592929 
+"highlight ExtraWhitespace ctermbg=red ctermfg=white guibg=#592929
 "match ExtraWhitespace /\s\+$/
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 set showcmd		" Show (partial) command in status line.
-set number      "show line number
-"set autowrite		" Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
-" set tw=79       " width of document
+set number      " show line number
 set background=dark	" improve syntax highlighting for dark backgrounds
 
 
@@ -156,26 +143,25 @@ set hlsearch		" Highlighting for searches
 set incsearch		" Incremental search
 set ignorecase		" Do case insensitive matching
 set showmatch		" Show matching brackets.
-"set smartcase		" Do smart case matching
+set smartcase		" Do smart case matching
 
 
 " Identation
 set ts=4       		" set tabstop at 4
 set expandtab		" expand each tab in spaces
-set shiftwidth=4        " size of automatic indentation
+set shiftwidth=4    " size of automatic indentation
 set shiftround
-set softtabstop=4       " must be same of ts to make sense
-set ai			" set autoident
+set softtabstop=4   " must be same of ts to make sense
+set ai			    " set autoident
 
-set viminfo='10,\"100,:20,%,n~/.viminfo " memoriza posicao do arquivo desde a ultima edicao
+
+" memoriza posicao do arquivo desde a ultima edicao
+set viminfo='10,\"100,:20,%,n~/.viminfo
+
 set pastetoggle=<F2>
-
-" File extension modifiers
-autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 
 nnoremap <leader>/ :let@/ = ""<CR>
-set ai			" set autoident
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -195,3 +181,8 @@ augroup resCur
 augroup END
 
 filetype plugin indent on
+
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so ~/.vimrc | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
