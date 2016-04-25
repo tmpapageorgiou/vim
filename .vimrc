@@ -1,23 +1,49 @@
-"call pathogen#infect()
-    " All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
-    " /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
-    " you can find below.  If you wish to change any of those settings, you should
-    " do it in this file (/etc/vim/vimrc), since debian.vim will be overwritten
-    " everytime an upgrade of the vim packages is performed.  It is recommended to
-    " make changes after sourcing debian.vim since it alters the value of the
-    " 'compatible' option.
+set nocompatible              " required
+filetype off                  " required
 
-" This line should not be removed as it ensures that various options are
-" properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
-" =============
-" MY LABORATORY
-" =============
+" Python plugins
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'davidhalter/jedi-vim'
 
-" Auto reload vim.rc
-" autocmd! bufwritepost .vimrc source %
+" Syntax auto evaluation
+"Plugin 'scrooloose/syntastic'
+"Plugin 'nvie/vim-flake8'
+
+" Javascript plugins
+Plugin 'elzr/vim-json'
+"Plugin 'pangloss/vim-javascript' " js support improvements
+
+" Go pluging
+"Plugin 'fatih/vim-go'
+
+" Use tab to trigger auto completion
+Plugin 'ervandew/supertab'
+
+" General editor plugins
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" Git
+Plugin 'tpope/vim-fugitive'
+
+" Color schemes
+Plugin 'geoffharcourt/one-dark.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+
+syntax on
+filetype on
+filetype plugin on
+filetype plugin indent on
 
 " Rebind <Leader> key
 let mapleader = ","
@@ -29,12 +55,19 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 " easier moving between tabs
-map <Leader>j <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
+" map <Leader>j <esc>:tabprevious<CR>
+" map <Leader>m <esc>:tabnext<CR>
+
+" NERDTree
+map <Leader>t :NERDTreeToggle<CR>
+autocmd vimenter * NERDTree
+" Never let NERDTree alone
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
 
+" indentation command
 vnoremap < <gv " better indentation
 vnoremap > >gv " better indentation
 
@@ -44,8 +77,8 @@ vnoremap > >gv " better indentation
 " au InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Color scheme
-" mkdir -p ~/.vim/colors && cd ~/.vim/colors
-" wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
+colorscheme onedark
+set background=dark	" improve syntax highlighting for dark backgrounds
 set t_Co=256
 color wombat256mod
 
@@ -53,90 +86,100 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace / \+$/
 
 highlight SignColumn ctermbg=230
-set colorcolumn=80
+set colorcolumn=+1
 
-" easier formatting of paragraphs
-vmap Q gq
-nmap Q gqap
 
-" Setup Pathogen to manage your plugins
-" mkdir -p ~/.vim/autoload ~/.vim/bundle
-" curl -so ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-" Now you can install any plugin into a .vim/bundle/plugin-name/ folder
-call pathogen#infect()
+"=============
+" PYTHON SETUP
+"=============
 
-" Settings for jedi-vim
-" cd ~/.vim/bundle
-" git clone git://github.com/davidhalter/jedi-vim.git
+" Jedi-vim
 "" let g:jedi#usages_command = "<Leader>z"
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 let g:jedi#auto_initialization = 1
-let g:jedi#rename_command = "<leader>R"
+
+let python_highlight_all=1
+syntax on
+
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
-" Supertab
-let g:SuperTabDefaultCompletionType = "context"
-
-" Python folding
-" mkdir -p ~/.vim/ftplugin
-" wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
-set nofoldenable
-
-" AUto remove trailing spaces before save
-autocmd BufRead * :%s/\s\+$//e
+"python with virtualenv support
+if has( 'python')
+py << EOF
+import os
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  sys.path.insert(0, project_base_dir)
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+endif
 
 " syntax checker
-autocmd BufRead *.py set statusline+=%#warningmsg#
-autocmd BufRead *.py set statusline+=%{SyntasticStatuslineFlag()}
-autocmd BufRead *.py set statusline+=%*
-
 autocmd BufRead *.py let g:syntastic_always_populate_loc_list = 1
 autocmd BufRead *.py let g:syntastic_auto_loc_list = 1
 autocmd BufRead *.py let g:syntastic_check_on_open = 1
 autocmd BufRead *.py let g:syntastic_check_on_wq = 0
 
+"=============
+" COMMON SETUP
+"=============
+
+" CtrlP
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](node_modules|cache|busca|__pycache__|.git)$',
+  \ 'file': '\v\.(DS_Store|svn|png|jpe?g|gif|elc|rbc|pyc|swp|psd|ai|pdf|log|mov|aep|dmg|zip|gz)$',
+  \ }
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "context"
+
+set nofoldenable
+
+" AUto remove trailing spaces before save
+autocmd BufReadPre,BufWritePre * :%s/\s\+$//e
+
+" enter command mode with ;
+nnoremap ; :
+
 " File extension modifiers
 set nospell
+set modifiable
 "autocmd BufRead *.tex set spell spelllang=pt_br
 
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
-autocmd Filetype python setlocal ts=4 sts=4 sw=4
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
-autocmd Filetype json setlocal ts=2 sts=2 sw=2
+" autocmd Filetype json setlocal ts=2 sts=2 sw=2
 
-" ===============
-"  END LABORATORY
-" ===============
+set encoding=utf-8
 
-set nocompatible
+" make backspaces more powerfull
+set backspace=indent,eol,start
 
 if has("syntax")
   syntax on
 endif
 
-set background=dark
+" easier formatting of paragraphs
+vmap Q gq
+nmap Q gqap
 
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-if has("autocmd")
-  filetype plugin indent on
-endif
-
-"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guigb=red
-"au InsertLeave * match ExtraWhitespace /\s\+$/
-"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-"match OverLength /\%81v.*/
-
-"highlight ExtraWhitespace ctermbg=red ctermfg=white guibg=#592929
-"match ExtraWhitespace /\s\+$/
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 set showcmd		" Show (partial) command in status line.
-set number      " show line number
-set background=dark	" improve syntax highlighting for dark backgrounds
-
+set number      	" show line number
+set hidden 		" allows buffers to be hide even if it is modified
+set title 		" show file nam in the tittle bar
+set laststatus=2        " the statusline is now always shown
+set showmode            " show mode in status bar (insert/replace/...)
+set statusline=%<%f\ (%{&ft})\ -\ %{fugitive#statusline()}%-4(%m%)%=%-19(%3l,%02c%03V%)
+set fileformat=unix
+set fileformats=unix,dos,mac   " detects unix, dos, mac file formats in that order
 
 " Searching settings
 set hlsearch		" Highlighting for searches
@@ -145,23 +188,14 @@ set ignorecase		" Do case insensitive matching
 set showmatch		" Show matching brackets.
 set smartcase		" Do smart case matching
 
-
-" Identation
-set ts=4       		" set tabstop at 4
-set expandtab		" expand each tab in spaces
-set shiftwidth=4    " size of automatic indentation
-set shiftround
-set softtabstop=4   " must be same of ts to make sense
-set ai			    " set autoident
-
+" Paste toggle button
+set pastetoggle=<F2> 	" Set F2 as past mode toggle
+set copyindent          " copy the previous indentation on autoindenting
 
 " memoriza posicao do arquivo desde a ultima edicao
 set viminfo='10,\"100,:20,%,n~/.viminfo
 
-set pastetoggle=<F2>
-
-
-nnoremap <leader>/ :let@/ = ""<CR>
+" nnoremap <leader>/ :let@/ = ""<CR>
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -179,8 +213,6 @@ augroup resCur
   autocmd!
   autocmd BufWinEnter * call ResCur()
 augroup END
-
-filetype plugin indent on
 
 augroup myvimrc
     au!
