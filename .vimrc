@@ -29,6 +29,7 @@ Plugin 'ervandew/supertab'
 " General editor plugins
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-commentary'
 "Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " Git
@@ -36,6 +37,8 @@ Plugin 'tpope/vim-fugitive'
 
 " Color schemes
 Plugin 'geoffharcourt/one-dark.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'sickill/vim-monokai'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -77,7 +80,8 @@ vnoremap > >gv " better indentation
 " au InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Color scheme
-colorscheme onedark
+colorscheme monokai
+" colorscheme onedark
 set background=dark	" improve syntax highlighting for dark backgrounds
 set t_Co=256
 color wombat256mod
@@ -98,7 +102,10 @@ set colorcolumn=+1
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 let g:jedi#auto_initialization = 1
+let g:jedi#force_py_version = 3
 
+let g:pymode_rope = 0
+let g:pymode_virtualenv=1
 let python_highlight_all=1
 syntax on
 
@@ -121,7 +128,7 @@ endif
 " syntax checker
 autocmd BufRead *.py let g:syntastic_always_populate_loc_list = 1
 autocmd BufRead *.py let g:syntastic_auto_loc_list = 1
-autocmd BufRead *.py let g:syntastic_check_on_open = 1
+autocmd BufRead *.py let g:syntastic_check_on_open = 0
 autocmd BufRead *.py let g:syntastic_check_on_wq = 0
 
 "=============
@@ -133,6 +140,9 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](node_modules|cache|busca|__pycache__|.git)$',
   \ 'file': '\v\.(DS_Store|svn|png|jpe?g|gif|elc|rbc|pyc|swp|psd|ai|pdf|log|mov|aep|dmg|zip|gz)$',
   \ }
+
+" nnoremap <leader>n :bprev<CR>
+nnoremap <leader>m :bnext<CR>
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
@@ -152,6 +162,7 @@ set modifiable
 
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
+autocmd Filetype java setlocal ts=4 sts=4 sw=4 autoindent shiftround
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 " autocmd Filetype json setlocal ts=2 sts=2 sw=2
 
