@@ -13,8 +13,8 @@ Plugin 'gmarik/Vundle.vim'
 
 " Python plugins
 Plugin 'vim-scripts/indentpython.vim'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'scrooloose/syntastic'
+"Plugin 'davidhalter/jedi-vim'
+"Plugin 'scrooloose/syntastic'
 "Plugin 'nvie/vim-flake8'
 
 " Javascript plugins
@@ -153,6 +153,7 @@ vnoremap <Leader>s :sort<CR>
 
 " nnoremap <leader>n :bprev<CR>
 nnoremap <leader>m :bnext<CR>
+nnoremap <leader>n :bprev<CR>
 
 " indentation command
 vnoremap < <gv " better indentation
@@ -199,6 +200,8 @@ autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
 autocmd Filetype java setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+
+autocmd FileType python setlocal commentstring=#\ %s
 " autocmd Filetype json setlocal ts=2 sts=2 sw=2
 
 set encoding=utf-8
@@ -226,6 +229,7 @@ set showmode            " show mode in status bar (insert/replace/...)
 set statusline=%<%f\ (%{&ft})\ -\ %{fugitive#statusline()}%-4(%m%)%=%-19(%3l,%02c%03V%)
 set fileformat=unix
 set fileformats=unix,dos,mac   " detects unix, dos, mac file formats in that order
+set clipboard=unnamed   " copping to clipboard
 
 " Searching settings
 set hlsearch		" Highlighting for searches
