@@ -1,0 +1,12 @@
+bundle/gruvbox/
+bundle/indentpython.vim/
+bundle/nerdtree/
+bundle/one-dark.vim/
+bundle/vim-colorschemes/
+bundle/vim-commentary/
+bundle/vim-fugitive/
+bundle/vim-javacomplete2/
+bundle/vim-javascript/
+bundle/vim-json/
+bundle/vim-monokai/
+colors/monokai.vim
