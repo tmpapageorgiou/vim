@@ -10,3 +10,6 @@ bundle/vim-javascript/
 bundle/vim-json/
 bundle/vim-monokai/
 colors/monokai.vim
+bundle/ctrlp.vim/
+bundle/vim-go/
+

@@ -25,7 +25,7 @@ Plugin 'pangloss/vim-javascript' " js support improvements
 Plugin 'artur-shaik/vim-javacomplete2'
 
 " Go pluging
-"Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 
 " General editor plugins
 Plugin 'scrooloose/nerdtree'
@@ -194,7 +194,7 @@ set nospell
 set modifiable
 "autocmd BufRead *.tex set spell spelllang=pt_br
 
-set ts=4 sts=4 sw=4 expandtab noautoindent shiftround
+set ts=4 sts=4 sw=4 autoindent shiftround
 
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
