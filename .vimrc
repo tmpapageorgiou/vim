@@ -27,6 +27,9 @@ Plugin 'artur-shaik/vim-javacomplete2'
 " Go pluging
 Plugin 'fatih/vim-go'
 
+" C plugins
+Plugin 'Valloric/YouCompleteMe'
+
 " General editor plugins
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
@@ -56,10 +59,12 @@ filetype plugin indent on
 let mapleader = ","
 
 "=====================
-" Plugins Ssettings
+" Plugins Settings
 "=====================
 
+"=========
 " NERDTree
+
 map <Leader>t :NERDTreeToggle<CR>
 " Open NERDTree when startup
 "autocmd vimenter * NERDTree
@@ -85,7 +90,7 @@ let g:SuperTabDefaultCompletionType = "context"
 
 "=============
 " JEDI-VIM
-"" let g:jedi#usages_command = "<Leader>z"
+
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 let g:jedi#auto_initialization = 1
@@ -95,9 +100,6 @@ let g:pymode_rope = 0
 let g:pymode_virtualenv=1
 let python_highlight_all=1
 syntax on
-
-
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 "python with virtualenv support
 if has( 'python')
@@ -115,6 +117,7 @@ endif
 
 "=============
 " syntax checker
+
 " autocmd BufRead *.py let g:syntastic_always_populate_loc_list = 1
 " autocmd BufRead *.py let g:syntastic_auto_loc_list = 1
 " autocmd BufRead *.py let g:syntastic_check_on_open = 0
@@ -129,18 +132,9 @@ let g:syntastic_enable_balloons = 0
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_python_checkers=['flake8'] ", 'pyflakes']
 
-
-"=============
-" AIRLINE
-"let g:airline_theme = 'powerlineish'
-"let g:airline#extensions#branch#enabled = 1
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#syntastic#enabled = 1
-"let g:airline_powerline_fonts = 1
-
-"=============
-" GENERAL SETTINGS
-"=============
+"============
+" Key Mapping
+"============
 
 " Navigation between windows
 map <c-j> <c-w>j
@@ -159,10 +153,35 @@ nnoremap <leader>n :bprev<CR>
 vnoremap < <gv " better indentation
 vnoremap > >gv " better indentation
 
-" Show whitespace
-" MUST be inserted BEFORE the colorscheme command
-" autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-" au InsertLeave * match ExtraWhitespace /\s\+$/
+" auto complete markers on insert mode
+imap { {}<left>
+imap ( ()<left>
+imap [ []<left>
+imap " <C-V>"<C-V>"<left>
+imap ' <C-V>'<C-V>'<left>
+
+"==================
+" Language Specific
+"==================
+
+set ts=4 sts=4 sw=4 autoindent shiftround
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype c setlocal ts=4 sts=4 sw=4 cindent noexpandtab
+autocmd Filetype go setlocal ts=4 sts=4 sw=4 cindent noexpandtab
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
+autocmd Filetype java setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+
+autocmd FileType python setlocal commentstring=#\ %s
+autocmd FileType go autocmd BufWritePre <buffer> GoFmt
+
+autocmd FileType python map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+autocmd FileType go map <Leader>b Ofmt.Printf("\n") // DEBUGING<C-c>
+autocmd FileType c map <Leader>b Oprintf("\n"); // DEBUGING<C-c>
+
+"=============
+" COMMON SETUP
+"=============
 
 " Color scheme
 colorscheme monokai
@@ -177,14 +196,10 @@ match ExtraWhitespace / \+$/
 highlight SignColumn ctermbg=230
 set colorcolumn=+1
 
-"=============
-" COMMON SETUP
-"=============
-
 set nofoldenable
 
-" AUto remove trailing spaces before save
-autocmd BufReadPre,BufWritePre * :%s/\s\+$//e
+" AUto remove trailing white spaces before save
+" autocmd BufReadPre,BufWritePre * :%s/\s\+$//e
 
 " enter command mode with ;
 nnoremap ; :
@@ -193,16 +208,6 @@ nnoremap ; :
 set nospell
 set modifiable
 "autocmd BufRead *.tex set spell spelllang=pt_br
-
-set ts=4 sts=4 sw=4 autoindent shiftround
-
-autocmd Filetype html setlocal ts=2 sts=2 sw=2
-autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
-autocmd Filetype java setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
-autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
-
-autocmd FileType python setlocal commentstring=#\ %s
-" autocmd Filetype json setlocal ts=2 sts=2 sw=2
 
 set encoding=utf-8
 
@@ -216,7 +221,6 @@ endif
 " easier formatting of paragraphs
 vmap Q gq
 nmap Q gqap
-
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -242,29 +246,8 @@ set smartcase		" Do smart case matching
 set pastetoggle=<F2> 	" Set F2 as past mode toggle
 set copyindent          " copy the previous indentation on autoindenting
 
-" memoriza posicao do arquivo desde a ultima edicao
-set viminfo='10,\"100,:20,%,n~/.viminfo
-
-" nnoremap <leader>/ :let@/ = ""<CR>
-
-" Source a global configuration file if available
-" if filereadable("/etc/vim/vimrc.local")
-"   source /etc/vim/vimrc.local
-" endif
-"
-" function! ResCur()
-"   if line("'\"") <= line("$")
-"     normal! g`"
-"     return 1
-"   endif
-" endfunction
-"
-" augroup resCur
-"   autocmd!
-"   autocmd BufWinEnter * call ResCur()
-" augroup END
-
-"augroup myvimrc
-"    au!
-"    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so ~/.vimrc | if has('gui_running') | so $MYGVIMRC | endif
-"augroup END
+" Jump to the last position when reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
