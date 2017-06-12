@@ -36,6 +36,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-commentary'
 "Plugin 'vim-airline/vim-airline'
 Plugin 'ervandew/supertab'
+Plugin 'moll/vim-bbye'
+Plugin 'terryma/vim-multiple-cursors'
 "Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " Git
@@ -131,6 +133,17 @@ let g:syntastic_enable_signs = 0
 let g:syntastic_enable_balloons = 0
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_python_checkers=['flake8'] ", 'pyflakes']
+
+
+"============
+" Vim Multiple cursors
+"
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+let g:multi_cursor_start_key='<C-n>'
+let g:multi_cursor_start_word_key='w<C-n>'
 
 "============
 " Key Mapping
