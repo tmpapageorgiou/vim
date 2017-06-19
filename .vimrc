@@ -28,7 +28,7 @@ Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'fatih/vim-go'
 
 " C plugins
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " General editor plugins
 Plugin 'scrooloose/nerdtree'
@@ -47,6 +47,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'geoffharcourt/one-dark.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'sickill/vim-monokai'
+Plugin 'fatih/molokai'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -146,6 +147,32 @@ let g:multi_cursor_start_key='<C-n>'
 let g:multi_cursor_start_word_key='w<C-n>'
 
 "============
+" Vim Go
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+
+autocmd FileType go nmap <Leader>d  <Plug>(go-def)
+autocmd FileType go nmap <Leader>D  <Plug>(go-def-pop)
+autocmd FileType go nmap <Leader>o  <Plug>(go-doc)
+autocmd FileType go nmap <Leader>i  <Plug>(go-imports)
+
+"============
+" Vim Monokai
+syntax enable
+colorscheme monokai
+
+"============
+" Vim Molokai
+""let g:rehash256 = 1
+""let g:molokai_original = 1
+""colorscheme molokai
+
+"============
 " Key Mapping
 "============
 
@@ -186,10 +213,9 @@ autocmd Filetype java setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
 autocmd FileType python setlocal commentstring=#\ %s
-autocmd FileType go autocmd BufWritePre <buffer> GoFmt
 
 autocmd FileType python map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
-autocmd FileType go map <Leader>b Ofmt.Printf("\n") // DEBUGING<C-c>
+autocmd FileType go map <Leader>b Ofmt.Println("\n") // DEBUGING<C-c>
 autocmd FileType c map <Leader>b Oprintf("\n"); // DEBUGING<C-c>
 
 "=============
@@ -197,11 +223,10 @@ autocmd FileType c map <Leader>b Oprintf("\n"); // DEBUGING<C-c>
 "=============
 
 " Color scheme
-colorscheme monokai
 " colorscheme onedark
-set background=dark	" improve syntax highlighting for dark backgrounds
-set t_Co=256
-color wombat256mod
+" set background=dark	" improve syntax highlighting for dark backgrounds
+" set t_Co=256
+" color wombat256mod
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace / \+$/
