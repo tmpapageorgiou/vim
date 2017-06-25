@@ -48,7 +48,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'geoffharcourt/one-dark.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'sickill/vim-monokai'
-Plugin 'fatih/molokai'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -160,11 +159,12 @@ autocmd FileType go nmap <Leader>d  <Plug>(go-def)
 autocmd FileType go nmap <Leader>D  <Plug>(go-def-pop)
 autocmd FileType go nmap <Leader>o  <Plug>(go-doc)
 autocmd FileType go nmap <Leader>i  <Plug>(go-imports)
+autocmd FileType go nmap <Leader>r  <Plug>(go-rename)
 
 "============
 " Vim Monokai
-syntax enable
-colorscheme monokai
+" syntax enable
+" colorscheme monokai
 
 "============
 " Vim Molokai
@@ -216,10 +216,11 @@ autocmd FileType c map <Leader>b Oprintf("\n"); // DEBUGING<C-c>
 "=============
 
 " Color scheme
-" colorscheme onedark
+colorscheme monokai
+"colorscheme onedark
 set background=dark	" improve syntax highlighting for dark backgrounds
-" set t_Co=256
-" color wombat256mod
+set t_Co=256
+color wombat256mod
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace / \+$/
