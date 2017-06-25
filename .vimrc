@@ -39,6 +39,7 @@ Plugin 'ervandew/supertab'
 Plugin 'moll/vim-bbye'
 Plugin 'terryma/vim-multiple-cursors'
 "Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'Townk/vim-autoclose'
 
 " Git
 Plugin 'tpope/vim-fugitive'
@@ -84,12 +85,11 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](node_modules|cache|busca|__pycache__|.git)$',
   \ 'file': '\v\.(DS_Store|svn|png|jpe?g|gif|elc|rbc|pyc|swp|psd|ai|pdf|log|mov|aep|dmg|zip|gz)$',
   \ }
-
+nnoremap <C-b> :CtrlPBuffer<CR>
 
 "=============
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
-
 
 "=============
 " JEDI-VIM
@@ -152,7 +152,7 @@ let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
+" let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 
@@ -193,13 +193,6 @@ nnoremap <leader>n :bprev<CR>
 vnoremap < <gv " better indentation
 vnoremap > >gv " better indentation
 
-" auto complete markers on insert mode
-imap { {}<left>
-imap ( ()<left>
-imap [ []<left>
-imap " <C-V>"<C-V>"<left>
-imap ' <C-V>'<C-V>'<left>
-
 "==================
 " Language Specific
 "==================
@@ -224,7 +217,7 @@ autocmd FileType c map <Leader>b Oprintf("\n"); // DEBUGING<C-c>
 
 " Color scheme
 " colorscheme onedark
-" set background=dark	" improve syntax highlighting for dark backgrounds
+set background=dark	" improve syntax highlighting for dark backgrounds
 " set t_Co=256
 " color wombat256mod
 
