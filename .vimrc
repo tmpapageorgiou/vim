@@ -63,20 +63,12 @@ let mapleader = ","
 " Plugins Settings
 "=====================
 
-"=========
-" NERDTree
+"========
+" Vim Ack
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space><C-W><CR>
 
-map <Leader>t :NERDTreeToggle<CR>
-" Open NERDTree when startup
-"autocmd vimenter * NERDTree
-" Open a NERDTree automatically when vim starts up if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Never let NERDTree alone
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-"=============
+"======
 " CtrlP
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](node_modules|cache|busca|__pycache__|.git)$',
@@ -84,12 +76,24 @@ let g:ctrlp_custom_ignore = {
   \ }
 nnoremap <C-b> :CtrlPBuffer<CR>
 
-"=============
-" Supertab
-let g:SuperTabDefaultCompletionType = "context"
+"=======
+" Vim Go
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+" let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
 
-"=============
-" JEDI-VIM
+autocmd FileType go nmap <Leader>d  <Plug>(go-def)
+autocmd FileType go nmap <Leader>D  <Plug>(go-def-pop)
+autocmd FileType go nmap <Leader>o  <Plug>(go-doc)
+autocmd FileType go nmap <Leader>i  <Plug>(go-imports)
+autocmd FileType go nmap <Leader>r  <Plug>(go-rename)
+
+"=========
+" Jedi-vim
 
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
@@ -99,7 +103,6 @@ let g:jedi#force_py_version = 3
 let g:pymode_rope = 0
 let g:pymode_virtualenv=1
 let python_highlight_all=1
-syntax on
 
 "python with virtualenv support
 if has( 'python')
@@ -115,7 +118,45 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 endif
 
-"=============
+"============
+" Vim Molokai
+""let g:rehash256 = 1
+""let g:molokai_original = 1
+""colorscheme molokai
+
+"============
+" Vim Monokai
+" syntax enable
+" colorscheme monokai
+
+"=====================
+" Vim Multiple cursors
+"
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+let g:multi_cursor_start_key='<C-n>'
+let g:multi_cursor_start_word_key='w<C-n>'
+
+"=========
+" NERDTree
+
+map <Leader>t :NERDTreeToggle<CR>
+" Open NERDTree when startup
+"autocmd vimenter * NERDTree
+" Open a NERDTree automatically when vim starts up if no files were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Never let NERDTree alone
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"=========
+" Supertab
+let g:SuperTabDefaultCompletionType = "context"
+
+"===============
 " syntax checker
 
 " autocmd BufRead *.py let g:syntastic_always_populate_loc_list = 1
@@ -132,48 +173,9 @@ let g:syntastic_enable_balloons = 0
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_python_checkers=['flake8'] ", 'pyflakes']
 
-
-"============
-" Vim Multiple cursors
-"
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-let g:multi_cursor_start_key='<C-n>'
-let g:multi_cursor_start_word_key='w<C-n>'
-
-"============
-" Vim Go
-let g:go_fmt_autosave = 1
-let g:go_fmt_command = "goimports"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-" let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-
-autocmd FileType go nmap <Leader>d  <Plug>(go-def)
-autocmd FileType go nmap <Leader>D  <Plug>(go-def-pop)
-autocmd FileType go nmap <Leader>o  <Plug>(go-doc)
-autocmd FileType go nmap <Leader>i  <Plug>(go-imports)
-autocmd FileType go nmap <Leader>r  <Plug>(go-rename)
-
-"============
-" Vim Monokai
-" syntax enable
-" colorscheme monokai
-
-"============
-" Vim Molokai
-""let g:rehash256 = 1
-""let g:molokai_original = 1
-""colorscheme molokai
-
-"========
-" Vim Ack
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space><C-W><CR>
+"====================
+" YCM - YouCompleteMe
+let g:ycm_confirm_extra_conf = 0
 
 "============
 " Key Mapping
