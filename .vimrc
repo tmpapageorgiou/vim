@@ -5,53 +5,51 @@ filetype off                  " required
 " Plugins Setup
 "=====================
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/plugged')
 
 " Python plugins
-Plugin 'vim-scripts/indentpython.vim'
-"Plugin 'davidhalter/jedi-vim'
+Plug 'vim-scripts/indentpython.vim', { 'for': 'python' }
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 "Plugin 'scrooloose/syntastic'
 "Plugin 'nvie/vim-flake8'
 
 " Javascript plugins
-Plugin 'elzr/vim-json'
-Plugin 'pangloss/vim-javascript' " js support improvements
+Plug 'elzr/vim-json'
+Plug 'pangloss/vim-javascript', { 'for': 'javascrit' }
 
 " Java plugins
-Plugin 'artur-shaik/vim-javacomplete2'
+Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 
 " Go pluging
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 
 " C plugins
-" Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'for': 'c', 'do': './install.py --clang-completer' }
 
 " General editor plugins
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-commentary'
-"Plugin 'vim-airline/vim-airline'
-Plugin 'ervandew/supertab'
-Plugin 'moll/vim-bbye'
-Plugin 'terryma/vim-multiple-cursors'
-"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'Townk/vim-autoclose'
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-commentary'
+Plug 'ervandew/supertab'
+Plug 'moll/vim-bbye'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'Townk/vim-autoclose'
+Plug 'mileszs/ack.vim'
 
 " Git
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Color schemes
-Plugin 'geoffharcourt/one-dark.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'sickill/vim-monokai'
+Plug 'geoffharcourt/one-dark.vim'
+Plug 'morhetz/gruvbox'
+Plug 'sickill/vim-monokai'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-
+call plug#end()
 
 syntax on
 filetype on
@@ -171,6 +169,11 @@ autocmd FileType go nmap <Leader>r  <Plug>(go-rename)
 ""let g:rehash256 = 1
 ""let g:molokai_original = 1
 ""colorscheme molokai
+
+"========
+" Vim Ack
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space><C-W><CR>
 
 "============
 " Key Mapping

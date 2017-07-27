@@ -2,6 +2,10 @@
 bundle/*
 !bundle/Vundle.vim
 
+# ignore Plug files
+plugged
+autoload/*
+
 # ignore vim files
 *.swp
 
