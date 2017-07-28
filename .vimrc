@@ -85,12 +85,17 @@ let g:go_highlight_methods = 1
 " let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
+let g:go_auto_sameids = 1
+let g:go_updatetime = 800
+let g:go_list_type = "quickfix"
 
-autocmd FileType go nmap <Leader>d  <Plug>(go-def)
-autocmd FileType go nmap <Leader>D  <Plug>(go-def-pop)
-autocmd FileType go nmap <Leader>o  <Plug>(go-doc)
-autocmd FileType go nmap <Leader>i  <Plug>(go-imports)
-autocmd FileType go nmap <Leader>r  <Plug>(go-rename)
+autocmd FileType go nnoremap <Leader>d <Plug>(go-def)
+autocmd FileType go nnoremap <Leader>D <Plug>(go-def-pop)
+autocmd FileType go nnoremap <Leader>R :GoReferrers<CR>
+autocmd FileType go nnoremap <Leader>o <Plug>(go-doc)
+autocmd FileType go nnoremap <Leader>i <Plug>(go-imports)
+autocmd FileType go nnoremap <Leader>r <Plug>(go-rename)
+autocmd FileType go nnoremap <Leader>l :GoDecls<CR>
 
 "=========
 " Jedi-vim
