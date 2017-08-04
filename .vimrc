@@ -38,7 +38,8 @@ Plug 'tpope/vim-commentary'
 Plug 'ervandew/supertab'
 Plug 'moll/vim-bbye'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'Townk/vim-autoclose'
+" Plug 'Townk/vim-autoclose'
+Plug 'Raimondi/delimitMate'
 Plug 'mileszs/ack.vim'
 
 " Git
@@ -89,12 +90,12 @@ let g:go_auto_sameids = 1
 let g:go_updatetime = 800
 let g:go_list_type = "quickfix"
 
-autocmd FileType go nnoremap <Leader>d <Plug>(go-def)
-autocmd FileType go nnoremap <Leader>D <Plug>(go-def-pop)
+autocmd FileType go nmap <Leader>d <Plug>(go-def)
+autocmd FileType go nmap <Leader>D <Plug>(go-def-pop)
 autocmd FileType go nnoremap <Leader>R :GoReferrers<CR>
-autocmd FileType go nnoremap <Leader>o <Plug>(go-doc)
-autocmd FileType go nnoremap <Leader>i <Plug>(go-imports)
-autocmd FileType go nnoremap <Leader>r <Plug>(go-rename)
+autocmd FileType go nmap <Leader>o <Plug>(go-doc)
+autocmd FileType go nmap <Leader>i <Plug>(go-imports)
+autocmd FileType go nmap <Leader>r <Plug>(go-rename)
 autocmd FileType go nnoremap <Leader>l :GoDecls<CR>
 
 "=========
@@ -214,7 +215,7 @@ autocmd Filetype go setlocal ts=4 sts=4 sw=4 cindent noexpandtab
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
 autocmd Filetype java setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
-
+7
 autocmd FileType python setlocal commentstring=#\ %s
 
 autocmd FileType python map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
@@ -238,11 +239,6 @@ match ExtraWhitespace / \+$/
 highlight SignColumn ctermbg=230
 set colorcolumn=+1
 
-set nofoldenable
-
-" AUto remove trailing white spaces before save
-" autocmd BufReadPre,BufWritePre * :%s/\s\+$//e
-
 " enter command mode with ;
 nnoremap ; :
 
@@ -256,11 +252,10 @@ set encoding=utf-8
 " make backspaces more powerfull
 set backspace=indent,eol,start
 
-if has("syntax")
-  syntax on
-endif
+"Pressing backspace in normal mode behaves like it would in insert mode
+nnoremap <silent> <Backspace> i<Backspace><ESC>l
 
-" easier formatting of paragraphs
+" Formatting of paragraphs
 vmap Q gq
 nmap Q gqap
 
@@ -276,6 +271,12 @@ set statusline=%<%f\ (%{&ft})\ -\ %{fugitive#statusline()}%-4(%m%)%=%-19(%3l,%02
 set fileformat=unix
 set fileformats=unix,dos,mac   " detects unix, dos, mac file formats in that order
 set clipboard=unnamed   " copping to clipboard
+set scrolloff=10  "Keep at least 10 lines in view when the cursor hits the bottom of the buffer"
+set nofoldenable
+set notimeout	"Wait indefinitely for a keypress when we press the leader key"
+set cursorline	"Show the current line you're on"
+set wildmenu	"Show completions in a bar"
+set ruler	"Show our current position"
 
 " Searching settings
 set hlsearch		" Highlighting for searches
