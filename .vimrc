@@ -30,6 +30,7 @@ Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 
 " C plugins
 Plug 'Valloric/YouCompleteMe', { 'for': 'c', 'do': './install.py --clang-completer' }
+Plug 'brookhong/cscope.vim', { 'for': 'c' }
 
 " General editor plugins
 Plug 'scrooloose/nerdtree'
@@ -76,6 +77,21 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(DS_Store|svn|png|jpe?g|gif|elc|rbc|pyc|swp|psd|ai|pdf|log|mov|aep|dmg|zip|gz)$',
   \ }
 nnoremap <C-b> :CtrlPBuffer<CR>
+
+"===========
+" Cscope
+nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+nnoremap <leader>l :call ToggleLocationList()<CR>
+" s: Find this C symbol
+nnoremap <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+" g: Find this definition
+nnoremap <leader>d :call CscopeFind('g', expand('<cword>'))<CR>
+" d: Find functions called by this function
+nnoremap <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+" c: Find functions calling this function
+nnoremap <leader>R :call CscopeFind('c', expand('<cword>'))<CR>
+" i: Find files #including this file
+nnoremap <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 
 "=======
 " Vim Go
