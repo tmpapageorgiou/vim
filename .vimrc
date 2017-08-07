@@ -29,8 +29,9 @@ Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 
 " C plugins
-Plug 'Valloric/YouCompleteMe', { 'for': 'c', 'do': './install.py --clang-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'for': 'c', 'do': './install.py --clang-completer' }
 Plug 'brookhong/cscope.vim', { 'for': 'c' }
+Plug 'szw/vim-tags', { 'for': 'c' }
 
 " General editor plugins
 Plug 'scrooloose/nerdtree'
@@ -80,18 +81,22 @@ nnoremap <C-b> :CtrlPBuffer<CR>
 
 "===========
 " Cscope
-nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-nnoremap <leader>l :call ToggleLocationList()<CR>
+autocmd FileType c nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+autocmd FileType c nnoremap <leader>l :call ToggleLocationList()<CR>
 " s: Find this C symbol
-nnoremap <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+autocmd FileType c nnoremap <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
 " g: Find this definition
-nnoremap <leader>d :call CscopeFind('g', expand('<cword>'))<CR>
+" autocmd FileType c nnoremap <leader>d :call CscopeFind('g', expand('<cword>'))<CR>
 " d: Find functions called by this function
-nnoremap <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
-" c: Find functions calling this function
-nnoremap <leader>R :call CscopeFind('c', expand('<cword>'))<CR>
+autocmd FileType c nnoremap <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+autocmd FileType c nnoremap <leader>R :call CscopeFind('c', expand('<cword>'))<CR>
 " i: Find files #including this file
-nnoremap <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+autocmd FileType c nnoremap <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+
+"======
+" Ctags
+autocmd FileType c nnoremap <leader>d <C-]>
+autocmd FileType c nnoremap <leader>D <C-t>
 
 "=======
 " Vim Go
