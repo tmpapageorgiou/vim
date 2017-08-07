@@ -220,6 +220,29 @@ nnoremap <leader>n :bprev<CR>
 vnoremap < <gv " better indentation
 vnoremap > >gv " better indentation
 
+"Pressing backspace in normal mode behaves like it would in insert mode
+nnoremap <silent> <Backspace> i<Backspace><ESC>l
+
+" Remove search results highlights
+nnoremap <Leader><space> :nohlsearch<CR>
+
+" Formatting of paragraphs
+vmap Q gq
+nmap Q gqap
+
+" enter command mode with ;
+nnoremap ; :
+
+" Save CTRL+a in all modes
+noremap  <C-a> :update<CR>
+vnoremap <C-a> <C-C>:update<CR>
+inoremap <C-a> <C-O>:update<CR>
+
+" Save and quit CTRL+x in all modes
+noremap  <C-x> :x<CR>
+vnoremap <C-x> <C-C>:x<CR>
+inoremap <C-x> <C-O>:x<CR>
+
 "==================
 " Language Specific
 "==================
@@ -231,7 +254,6 @@ autocmd Filetype go setlocal ts=4 sts=4 sw=4 cindent noexpandtab
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
 autocmd Filetype java setlocal ts=4 sts=4 sw=4 expandtab autoindent shiftround
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
-7
 autocmd FileType python setlocal commentstring=#\ %s
 
 autocmd FileType python map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
@@ -255,8 +277,6 @@ match ExtraWhitespace / \+$/
 highlight SignColumn ctermbg=230
 set colorcolumn=+1
 
-" enter command mode with ;
-nnoremap ; :
 
 " File extension modifiers
 set nospell
@@ -268,12 +288,6 @@ set encoding=utf-8
 " make backspaces more powerfull
 set backspace=indent,eol,start
 
-"Pressing backspace in normal mode behaves like it would in insert mode
-nnoremap <silent> <Backspace> i<Backspace><ESC>l
-
-" Formatting of paragraphs
-vmap Q gq
-nmap Q gqap
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
