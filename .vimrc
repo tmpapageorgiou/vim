@@ -107,8 +107,8 @@ let g:go_highlight_methods = 1
 " let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
-let g:go_auto_sameids = 1
-let g:go_updatetime = 800
+"let g:go_auto_sameids = 1
+"let g:go_updatetime = 800
 let g:go_list_type = "quickfix"
 
 autocmd FileType go nmap <Leader>d <Plug>(go-def)
