@@ -33,6 +33,14 @@ Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 Plug 'brookhong/cscope.vim', { 'for': 'c' }
 Plug 'szw/vim-tags', { 'for': 'c' }
 
+" Snipets
+" Plug 'Shougo/neocomplcache'
+" Track the engine.
+Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+
+
 " General editor plugins
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
@@ -144,6 +152,45 @@ if 'VIRTUAL_ENV' in os.environ:
   execfile(activate_this, dict(__file__=activate_this))
 EOF
 endif
+
+"===========
+" ultisnip
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-m>"
+let g:UltiSnipsJumpBackwardTrigger="<c-?>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+" List snippets
+let g:UltiSnipsListSnippets="<c-l>"
+
+"let g:UltiSnipsSnippetDir='~/.vim/my-snippets'
+let g:UltiSnipsSnippetDirectories=['my-snippets']
+
+""===========
+"" Newsnippet
+"
+"" key-mappings.
+"" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <C-k>     <Plug>:neosnippet_expand_or_jump
+"smap <C-k>     <Plug>:neosnippet_expand_or_jump
+"xmap <C-k>     <Plug>:neosnippet_expand_target
+"
+"" SuperTab like snippets behavior.
+"" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+""imap <expr><TAB>
+"" \ pumvisible() ? "\<C-n>" :
+"" \ neosnippet#expandable_or_jumpable() ?
+"" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"
+"" For conceal markers.
+"if has('conceal')
+"  set conceallevel=2 concealcursor=niv
+"endif
 
 "============
 " Vim Molokai
