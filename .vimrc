@@ -20,7 +20,7 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
 " Javascript plugins
 Plug 'elzr/vim-json'
-Plug 'pangloss/vim-javascript', { 'for': 'javascrit' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
 " Java plugins
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
@@ -30,7 +30,8 @@ Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
 
 " C plugins
 " Plug 'Valloric/YouCompleteMe', { 'for': 'c', 'do': './install.py --clang-completer' }
-Plug 'brookhong/cscope.vim', { 'for': 'c' }
+" Need to install cscope `sudo apt-get install cscope`
+Plug 'brookhong/cscope.vim', { 'for': 'c', 'do': 'gksudo apt-get install cscope' }
 Plug 'szw/vim-tags', { 'for': 'c' }
 
 " Snipets
@@ -51,6 +52,7 @@ Plug 'terryma/vim-multiple-cursors'
 " Plug 'Townk/vim-autoclose'
 Plug 'Raimondi/delimitMate'
 Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-sleuth'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -194,9 +196,9 @@ let g:UltiSnipsSnippetDirectories=['my-snippets']
 
 "============
 " Vim Molokai
-""let g:rehash256 = 1
-""let g:molokai_original = 1
-""colorscheme molokai
+"let g:rehash256 = 1
+"let g:molokai_original = 1
+"colorscheme molokai
 
 "============
 " Vim Monokai
