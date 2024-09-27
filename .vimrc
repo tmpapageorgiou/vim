@@ -42,7 +42,6 @@ Plug 'szw/vim-tags', { 'for': 'c' }
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 
-
 " General editor plugins
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
@@ -114,6 +113,7 @@ autocmd FileType c nnoremap <leader>D <C-t>
 
 "=======
 " Vim Go
+"let g:go_highlight_operators = 0
 let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
@@ -124,6 +124,14 @@ let g:go_highlight_operators = 1
 "let g:go_auto_sameids = 1
 "let g:go_updatetime = 800
 let g:go_list_type = "quickfix"
+"let g:go_highlight_function_arguments = 0
+let g:go_highlight_function_calls = 1
+"let g:go_highlight_fields = 1
+"let g:go_highlight_generate_tags = 0
+"let g:go_highlight_format_strings = 1
+" let g:go_highlight_variable_declarations = 1
+"let g:go_highlight_variable_assignments = 1
+
 
 autocmd FileType go nmap <Leader>d <Plug>(go-def)
 autocmd FileType go nmap <Leader>D <Plug>(go-def-pop)
